@@ -1,12 +1,13 @@
 package it.introini.bikemifeedback.jobs
 
+import com.google.inject.Inject
 import io.vertx.core.Handler
 import io.vertx.core.impl.StringEscapeUtils
+import it.introini.bikemifeedback.rigs.stations.Station
+import it.introini.bikemifeedback.rigs.stations.StationManager
 import org.jsoup.Jsoup
 import org.jsoup.nodes.Document
-import org.jsoup.parser.Parser
 import org.pmw.tinylog.Logger
-import java.nio.charset.Charset
 
 
 open class BikeMiStationFetchJob: Handler<Long> {
@@ -15,6 +16,7 @@ open class BikeMiStationFetchJob: Handler<Long> {
         const val MARKER_REGEX = "GoogleMap.addMarker\\((.*)\\);"
     }
 
+    @Inject lateinit var stateManager: StationManager
 
     override fun handle(event: Long) {
         val document = Jsoup.connect(BIKE_STATION_URL)
@@ -32,6 +34,8 @@ open class BikeMiStationFetchJob: Handler<Long> {
         matches.forEach {
             Logger.info("Stazione: ${it.number} -- ${it.name}, Bici: ${it.getAvailableBikes()}, Bici elettriche: ${it.getAvailableEBikes()}, Stalli: ${it.getAvailableRacks()}")
         }
+        matches.map { Station(it) }
+               .let { stateManager.addState(it) }
     }
 }
 
