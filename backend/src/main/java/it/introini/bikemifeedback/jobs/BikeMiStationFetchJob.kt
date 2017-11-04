@@ -11,6 +11,7 @@ import org.pmw.tinylog.Logger
 
 
 open class BikeMiStationFetchJob: Handler<Long> {
+
     companion object: BikeMiStationFetchJob() {
         const val BIKE_STATION_URL = "https://www.bikemi.com/it/mappa-stazioni.aspx"
         const val MARKER_REGEX = "GoogleMap.addMarker\\((.*)\\);"
