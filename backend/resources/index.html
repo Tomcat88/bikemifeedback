@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>BikeMi Feedback</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-4 col-md-offset-4">
+                <div id="app">
+                  <div data-bind="ifnot: loadingData">
+                    <div class="">
+                      Aggiornato <span data-bind="text: momentHr"></span>
+                    </div>
+                    <div>
+                      <input class="form-control" type="text" placeholder="Cerca..." data-bind="textInput: query">
+                    </div>
+                    <div>
+                      <ul class="list-group" data-bind="foreach: stations">
+                        <li class="list-group-item">
+                          <span data-bind="text: name"></span>
+                          <div class="pull-right">
+                            <span class="label label-warning" data-bind="text: bikes"></span>
+                            <span class="label label-danger" data-bind="text: ebikes"></span>
+                            <span class="label label-default" data-bind="text: racks"></span>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/knockout/3.4.2/knockout-min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/moment.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.19.1/locale/it.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD8Fq4XJx8WxZU_2fpBC0b2Fuh-9n_LGjY&libraries=geometry,places,visualization"></script>
+    <script src="/bikemifeedback/static/app.js"></script>
+</body>
+</html>

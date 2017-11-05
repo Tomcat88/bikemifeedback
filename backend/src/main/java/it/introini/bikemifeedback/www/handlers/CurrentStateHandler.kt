@@ -1,6 +1,7 @@
 package it.introini.bikemifeedback.www.handlers
 
 import com.google.inject.Inject
+import io.netty.handler.codec.http.HttpHeaderNames
 import io.netty.handler.codec.http.HttpResponseStatus
 import io.vertx.core.Handler
 import io.vertx.ext.web.RoutingContext
@@ -16,6 +17,7 @@ open class CurrentStateHandler: Handler<RoutingContext> {
 
     override fun handle(event: RoutingContext) {
         val currentState = stationManager.getState()
+        event.response().putHeader(HttpHeaderNames.CONTENT_TYPE, "application/json")
         if (currentState == null) {
             event.response().statusCode = HttpResponseStatus.OK.code()
             event.response().end(Response.empty().encode())

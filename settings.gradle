@@ -1,4 +1,3 @@
 rootProject.name = 'bikemifeedback'
 
 include "backend"
-include "frontend"
