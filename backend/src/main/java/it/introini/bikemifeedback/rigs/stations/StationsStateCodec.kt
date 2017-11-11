@@ -29,7 +29,7 @@ open class StationsStateCodec: Codec<StationsState> {
                 .map {
                     Station( it.getString("name"),
                             GeoPoint( it.getJsonObject("position").getDouble("lat"),
-                                      it.getJsonObject("position").getDouble("lon") ),
+                                      it.getJsonObject("position").getDouble("lng") ?: 0.0 ),
                             it.getInteger("code"),
                             it.getInteger("bikes"),
                             it.getInteger("ebikes"),
